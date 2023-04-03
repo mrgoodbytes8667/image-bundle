@@ -1,0 +1,36 @@
+name: Tests By Symfony Version
+
+on:
+  pull_request:
+  workflow_dispatch:
+  repository_dispatch:
+  push:
+    branches:
+      - main
+      - 0.*
+      - 1.*
+  schedule:
+    # Weekly on Thursdays at 3pm UTC
+    - cron:  '0 15 * * 4'
+
+jobs:
+  symfony60:
+    uses: mrgoodbytes8667/workflows/.github/workflows/run-tests-by-version.yml@php8.1-8.2
+    with:
+      phpUnitVersion: 10.0
+      symfony: 6.0
+      setupPhpExtensions: ", imagick"
+
+  symfony61:
+    uses: mrgoodbytes8667/workflows/.github/workflows/run-tests-by-version.yml@php8.1-8.2
+    with:
+      phpUnitVersion: 10.0
+      symfony: 6.1
+      setupPhpExtensions: ", imagick"
+
+  symfony62:
+    uses: mrgoodbytes8667/workflows/.github/workflows/run-tests-by-version.yml@php8.1-8.2
+    with:
+      phpUnitVersion: 10.0
+      symfony: 6.2
+      setupPhpExtensions: ", imagick"
