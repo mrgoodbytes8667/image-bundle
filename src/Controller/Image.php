@@ -246,7 +246,7 @@ class Image
         }
         
         try {
-            $cacheKey = u($this->successCachePrefix)->append('.getImageAsFromUrl.')->append(urlencode($url))->append('.contents')->toString();
+            $cacheKey = u($this->successCachePrefix)->append('.getImageAsFromUrl.', urlencode($url), urlencode($contentType->value), '.contents')->toString();
             $item = $this->cache->getItem($cacheKey);
             /** @var callable|null $responseCallable */
             if ($item->isHit()) {
