@@ -41,3 +41,19 @@ jobs:
       phpUnitVersion: 10.0
       symfony: 6.3
       setupPhpExtensions: ", imagick"
+
+  symfony64:
+    uses: mrgoodbytes8667/workflows/.github/workflows/run-tests-by-version.yml@php8.1-8.2
+    with:
+      phpUnitVersion: 10.0
+      symfony: 6.4
+      setupPhpExtensions: ", imagick"
+      minStability: 'dev'
+
+  symfony70:
+    uses: mrgoodbytes8667/workflows/.github/workflows/run-tests-by-version.yml@php8.1-8.2
+    with:
+      phpUnitVersion: 10.0
+      symfony: 7.0
+      setupPhpExtensions: ", imagick"
+      minStability: 'dev'
