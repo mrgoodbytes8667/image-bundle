@@ -50,7 +50,7 @@ class Image
      * @param int $responseSuccessInitialDuration
      * @param int $responseFallbackDuration
      */
-    public function __construct(private CacheItemPoolInterface $cache, private bool $useSuccessCache, private string $successCachePrefix, int $successCacheDuration, private bool $useFallbackCache, private string $fallbackCachePrefix, int $fallbackCacheDuration, private int $responseSuccessCachedDuration, private int $responseSuccessInitialDuration, private int $responseFallbackDuration)
+    public function __construct(private readonly CacheItemPoolInterface $cache, private bool $useSuccessCache, private readonly string $successCachePrefix, int $successCacheDuration, private bool $useFallbackCache, private readonly string $fallbackCachePrefix, int $fallbackCacheDuration, private int $responseSuccessCachedDuration, private int $responseSuccessInitialDuration, private int $responseFallbackDuration)
     {
         $successExpiresAfter = DateInterval::createFromDateString(sprintf('%d minutes', $successCacheDuration));
         if (!$successExpiresAfter) {
@@ -137,10 +137,8 @@ class Image
         }
         
         $info = getimagesizefromstring($data);
-        if (isset($info['mime'])) {
-            if ($info['mime'] === $contentType->value) {
-                return self::createResponse($data, $contentType, $responseCallback);
-            }
+        if (isset($info['mime']) && $info['mime'] === $contentType->value) {
+            return self::createResponse($data, $contentType, $responseCallback);
         }
 
         ob_start();
