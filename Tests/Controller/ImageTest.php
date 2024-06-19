@@ -53,7 +53,7 @@ class ImageTest extends TestCase
         $client = new MockHttpClient(new MockResponse(file_get_contents($url)));
         $image = $this->setupImage($cache, $client, false, false);
 
-        $response = $image->getImageAsPngFromUrl('http://via.placeholder.com/640x480.png');
+        $response = $image->getImageAsPngFromUrl('https://dummyimage.com/640x480.png');
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(ContentType::imagePng->value, $response->headers->get('Content-Type'));
@@ -83,7 +83,7 @@ class ImageTest extends TestCase
         $client = new MockHttpClient(new MockResponse(file_get_contents($url)));
         $image = $this->setupImage($cache, $client, false, false);
 
-        $response = $image->getImageAsWebPFromUrl('http://via.placeholder.com/640x480.png');
+        $response = $image->getImageAsWebPFromUrl('https://dummyimage.com/640x480.png');
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(ContentType::imageWebP->value, $response->headers->get('Content-Type'));
@@ -102,7 +102,7 @@ class ImageTest extends TestCase
         $client = new MockHttpClient(new MockResponse(file_get_contents($url)));
         $image = $this->setupImage($cache, $client, true, true);
 
-        $response = $image->getImageAsPngFromUrl('http://via.placeholder.com/640x480.png');
+        $response = $image->getImageAsPngFromUrl('https://dummyimage.com/640x480.png');
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(ContentType::imagePng->value, $response->headers->get('Content-Type'));
@@ -154,7 +154,7 @@ class ImageTest extends TestCase
         $client = new MockHttpClient(new MockResponse(file_get_contents($url)));
         $image = $this->setupImage($cache, $client, true, true);
 
-        $response = $image->getImageAsPngFromUrl('http://via.placeholder.com/640x480.png');
+        $response = $image->getImageAsPngFromUrl('https://dummyimage.com/640x480.png');
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(ContentType::imagePng->value, $response->headers->get('Content-Type'));
@@ -172,7 +172,7 @@ class ImageTest extends TestCase
         $this->expectException(ClientExceptionInterface::class);
         $client = new MockHttpClient(new MockResponse('', Response::HTTP_NOT_FOUND));
 
-        $response = Image::getImageAs(ContentType::imagePng, url: 'http://via.placeholder.com/640x480.png', client: $client);
+        $response = Image::getImageAs(ContentType::imagePng, url: 'https://dummyimage.com/640x480.png', client: $client);
     }
 
     /**
@@ -186,7 +186,7 @@ class ImageTest extends TestCase
         $url = $this->getSampleImage();
         $client = new MockHttpClient([new MockResponse('', Response::HTTP_NOT_FOUND), new MockResponse(file_get_contents($url))]);
 
-        $response = Image::getImageAs(ContentType::imagePng, url: 'http://via.placeholder.com/640x480.png', defaultUrl: 'http://via.placeholder.com/640x480.png', client: $client);
+        $response = Image::getImageAs(ContentType::imagePng, url: 'https://dummyimage.com/640x480.png', defaultUrl: 'https://dummyimage.com/640x480.png', client: $client);
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(ContentType::imagePng->value, $response->headers->get('Content-Type'));
@@ -199,7 +199,7 @@ class ImageTest extends TestCase
     {
         $url = $this->getSampleImage();
         $client = new MockHttpClient(new MockResponse(file_get_contents($url)));
-        $response = Image::getImageAsPng('http://via.placeholder.com/640x480.png', client: $client);
+        $response = Image::getImageAsPng('https://dummyimage.com/640x480.png', client: $client);
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(ContentType::imagePng->value, $response->headers->get('Content-Type'));
@@ -212,7 +212,7 @@ class ImageTest extends TestCase
     {
         $url = $this->getSampleImage();
         $client = new MockHttpClient(new MockResponse(file_get_contents($url)));
-        $response = Image::getImageAsWebP('http://via.placeholder.com/640x480.png', client: $client);
+        $response = Image::getImageAsWebP('https://dummyimage.com/640x480.png', client: $client);
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(ContentType::imageWebP->value, $response->headers->get('Content-Type'));
@@ -228,6 +228,6 @@ class ImageTest extends TestCase
     {
         $this->expectException(UnsupportedMediaTypeHttpException::class);
         $this->expectExceptionMessage('"getImageAs" can only accept content types of jpeg, png, gif, or webp.');
-        Image::getImageAs(ContentType::json, 'http://via.placeholder.com/640x480.png');
+        Image::getImageAs(ContentType::json, 'https://dummyimage.com/640x480.png');
     }
 }
