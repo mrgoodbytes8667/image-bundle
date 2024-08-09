@@ -3,6 +3,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Bytes\ImageBundle\Cache\ImageCache;
 use Bytes\ImageBundle\Controller\Image;
 
 /**
@@ -30,6 +31,15 @@ return static function (ContainerConfigurator $container) {
         ->call('setClient', [service('http_client')])
         ->lazy()
         ->alias(Image::class, 'bytes_image.image')
+        ->public();
+
+    $services->set('bytes_image.image.cache', ImageCache::class)
+        ->args([
+            '',
+            ''
+        ])
+        ->lazy()
+        ->alias(ImageCache::class, 'bytes_image.image.cache')
         ->public();
     //endregion
 };

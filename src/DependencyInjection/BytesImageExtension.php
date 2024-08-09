@@ -37,5 +37,9 @@ class BytesImageExtension extends Extension implements ExtensionInterface
         $definition->replaceArgument(7, $config['cache']['response']['success']['cached']['duration']);
         $definition->replaceArgument(8, $config['cache']['response']['success']['initial']['duration']);
         $definition->replaceArgument(9, $config['cache']['response']['fallback']['duration']);
+
+        $definition = $container->getDefinition('bytes_image.image.cache');
+        $definition->replaceArgument(0, $config['cache']['local']['success']['key']);
+        $definition->replaceArgument(1, $config['cache']['local']['fallback']['key']);
     }
 }
