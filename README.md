@@ -11,7 +11,7 @@
 ![GitHub Tests Workflow Status](https://img.shields.io/github/actions/workflow/status/mrgoodbytes8667/image-bundle/run-tests.yml?logo=github&logoColor=FFF&style=flat)
 ![GitHub By Version Workflow Status](https://img.shields.io/github/actions/workflow/status/mrgoodbytes8667/image-bundle/run-tests-by-version.yml?label=by-version%20build&logo=github&logoColor=FFF&style=flat)
 ![GitHub Coverage Workflow Status](https://img.shields.io/github/actions/workflow/status/mrgoodbytes8667/image-bundle/code-coverage.yml?label=coverage%20build&logo=github&logoColor=FFF&style=flat)
-[![codecov](https://img.shields.io/codecov/c/github/mrgoodbytes8667/image-bundle/0.11?logo=codecov&logoColor=FFF&style=flat)](https://codecov.io/gh/mrgoodbytes8667/image-bundle)  
+[![codecov](https://img.shields.io/codecov/c/github/mrgoodbytes8667/image-bundle/0.12?logo=codecov&logoColor=FFF&style=flat)](https://codecov.io/gh/mrgoodbytes8667/image-bundle)  
 A Symfony bundle for image caching (fork of/replacement for [avatar-bundle](https://github.com/mrgoodbytes8667/avatar-bundle))
 
 ## Installation
