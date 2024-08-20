@@ -3,6 +3,7 @@
 namespace Bytes\ImageBundle\Tests\Controller;
 
 use Bytes\Common\Faker\TestFakerTrait;
+use Bytes\ImageBundle\Cache\ImageCache;
 use Bytes\ImageBundle\Controller\Image;
 use Bytes\ResponseBundle\Enums\ContentType;
 use Bytes\Tests\Common\MockHttpClient\MockResponse;
@@ -26,7 +27,6 @@ use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-
 
 class ImageTest extends TestCase
 {
@@ -66,7 +66,6 @@ class ImageTest extends TestCase
 
     /**
      * @dataProvider provideSampleImagesPng
-     * @param $url
      */
     public function testGetImageAsPng($url)
     {
@@ -82,21 +81,17 @@ class ImageTest extends TestCase
 
     /**
      * @param AdapterInterface $cache
-     * @param HttpClientInterface $client
-     * @param bool $useSuccessCache
-     * @param bool $useFallbackCache
-     * @return Image
      */
     private function setupImage($cache, HttpClientInterface $client, bool $useSuccessCache, bool $useFallbackCache): Image
     {
-        $image = new Image($cache, $useSuccessCache, '', 1, $useFallbackCache, '', 1, 1, 1, 1);
+        $image = new Image(cache: $cache, imageCache: new ImageCache(successCachePrefix: '', fallbackCachePrefix: ''), useSuccessCache: $useSuccessCache, successCacheDuration: 1, useFallbackCache: $useFallbackCache, fallbackCacheDuration: 1, responseSuccessCachedDuration: 1, responseSuccessInitialDuration: 1, responseFallbackDuration: 1);
         $image->setClient($client);
+
         return $image;
     }
 
     /**
      * @dataProvider provideSampleImagesWebp
-     * @param $url
      */
     public function testGetImageAsWebP($url)
     {
@@ -110,9 +105,6 @@ class ImageTest extends TestCase
         $this->assertEquals(ContentType::imageWebP->value, $response->headers->get('Content-Type'));
     }
 
-    /**
-     *
-     */
     public function testGetImageAsPngWithCache()
     {
         $item = new CacheItem();
@@ -129,14 +121,10 @@ class ImageTest extends TestCase
         $this->assertEquals(ContentType::imagePng->value, $response->headers->get('Content-Type'));
     }
 
-    /**
-     * @param string $extension
-     * @return string
-     */
     protected static function getSampleImage(string $extension = 'png'): string
     {
-        $fixtures = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR;
-        $path = $fixtures . 'sample.' . $extension;
+        $fixtures = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR;
+        $path = $fixtures.'sample.'.$extension;
         if (in_array($extension, ['jpg', 'gif', 'png', 'webp'])) {
             $imagine = new Imagine();
             $palette = new RGB();
@@ -146,8 +134,8 @@ class ImageTest extends TestCase
             $textPalette = new RGB();
             $textColor = $textPalette->color('#FFF', 100);
 
-            //text
-            $fontPath = $fixtures . 'font' . DIRECTORY_SEPARATOR . 'Roboto-Regular.ttf';
+            // text
+            $fontPath = $fixtures.'font'.DIRECTORY_SEPARATOR.'Roboto-Regular.ttf';
             $fs = new Filesystem();
             if (!$fs->exists($fontPath)) {
                 self::throwException(new Exception());
@@ -155,7 +143,7 @@ class ImageTest extends TestCase
 
             $font = $imagine->font($fontPath, 20, $textColor);
             $image->draw()
-                ->text('sample.' . $extension, $font, new Point(5, 5), 0);
+                ->text('sample.'.$extension, $font, new Point(5, 5), 0);
 
             $image->save($path);
         }
@@ -163,9 +151,6 @@ class ImageTest extends TestCase
         return $path;
     }
 
-    /**
-     *
-     */
     public function testGetImageAsPngThrowException()
     {
         $cache = $this->getMockBuilder(AdapterInterface::class)->getMock();
@@ -189,7 +174,6 @@ class ImageTest extends TestCase
      */
     public function testGetImageAsInvalidUrl()
     {
-
         $this->expectException(ClientExceptionInterface::class);
         $client = new MockHttpClient(new MockResponse('', Response::HTTP_NOT_FOUND));
 
@@ -213,9 +197,6 @@ class ImageTest extends TestCase
         $this->assertEquals(ContentType::imagePng->value, $response->headers->get('Content-Type'));
     }
 
-    /**
-     *
-     */
     public function testGetImageAsPngFromUrl()
     {
         $url = $this->getSampleImage();
@@ -226,9 +207,6 @@ class ImageTest extends TestCase
         $this->assertEquals(ContentType::imagePng->value, $response->headers->get('Content-Type'));
     }
 
-    /**
-     *
-     */
     /*public function testGetImageAsWebPFromUrl()
     {
         $url = $this->getSampleImage();
