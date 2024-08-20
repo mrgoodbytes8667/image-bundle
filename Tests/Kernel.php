@@ -12,20 +12,11 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
 
-/**
- *
- */
 class Kernel extends BaseKernel
 {
-    /**
-     * @var string
-     */
-    protected $callback;
+    protected string $callback;
 
-    /**
-     * @var array
-     */
-    protected $config;
+    protected array $config;
 
     /**
      * @var array
@@ -34,8 +25,6 @@ class Kernel extends BaseKernel
 
     /**
      * Kernel constructor.
-     * @param string $callback
-     * @param array $config
      */
     public function __construct(string $callback = '', array $config = [])
     {
@@ -52,12 +41,11 @@ class Kernel extends BaseKernel
     {
         return [
             new FrameworkBundle(),
-            new BytesImageBundle()
+            new BytesImageBundle(),
         ];
     }
 
     /**
-     * @param LoaderInterface $loader
      * @throws Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
@@ -82,15 +70,12 @@ class Kernel extends BaseKernel
             $container
                 ->loadFromExtension('framework', [
                     'secret' => 'abc123',
-                    'http_method_override' => false
+                    'http_method_override' => false,
                 ])
                 ->loadFromExtension('bytes_image', $this->config);
         });
     }
 
-    /**
-     * @return bool
-     */
     public function hasCallback(): bool
     {
         return !empty($this->callback);
@@ -107,52 +92,46 @@ class Kernel extends BaseKernel
      */
     public function getCacheDir(): string
     {
-        return parent::getCacheDir() . '/' . spl_object_hash($this);
+        return parent::getCacheDir().'/'.spl_object_hash($this);
     }
 
-    /**
-     * @return string
-     */
     public function getCallback(): string
     {
         return $this->callback;
     }
 
     /**
-     * @param string $callback
      * @return $this
      */
     public function setCallback(string $callback): static
     {
         $this->callback = $callback;
+
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getConfig(): array
     {
         return $this->config;
     }
 
     /**
-     * @param array $config
      * @return $this
      */
     public function setConfig(array $config): static
     {
         $this->config = $config;
+
         return $this;
     }
 
     /**
-     * @param array $config
      * @return $this
      */
     public function mergeConfig(array $config): static
     {
         $this->config = array_merge($this->config, $config);
+
         return $this;
     }
 
@@ -165,22 +144,24 @@ class Kernel extends BaseKernel
     }
 
     /**
-     * @param array $classes
      * @return $this
      */
     public function setClasses(array $classes): static
     {
         $this->classes = $classes;
+
         return $this;
     }
 
     /**
      * @param string|array $class
+     *
      * @return $this
      */
     public function addClass($class): static
     {
         $this->classes[] = $class;
+
         return $this;
     }
 }

@@ -3,6 +3,7 @@
 namespace Bytes\ImageBundle\Cache;
 
 use Bytes\ResponseBundle\Enums\ContentType;
+
 use function Symfony\Component\String\u;
 
 class ImageCache

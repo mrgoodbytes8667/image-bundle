@@ -26,7 +26,7 @@ class Image
 
     private HttpClientInterface $client;
 
-    public function __construct(private readonly CacheItemPoolInterface $cache, private ImageCache $imageCache, private bool $useSuccessCache,
+    public function __construct(private readonly CacheItemPoolInterface $cache, private readonly ImageCache $imageCache, private bool $useSuccessCache,
         int $successCacheDuration, private bool $useFallbackCache, int $fallbackCacheDuration, private int $responseSuccessCachedDuration,
         private int $responseSuccessInitialDuration, private int $responseFallbackDuration)
     {

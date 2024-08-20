@@ -1,20 +1,14 @@
 <?php
 
-
 namespace Bytes\ImageBundle\Tests\DependencyInjection;
-
 
 use Bytes\ImageBundle\Tests\Kernel;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- *
- */
 class DependencyInjectionTest extends TestCase
 {
-
     /**
      * @var Kernel|null
      */
@@ -25,9 +19,6 @@ class DependencyInjectionTest extends TestCase
      */
     private $fs;
 
-    /**
-     *
-     */
     public function testFoundService()
     {
         $kernel = $this->kernel;
@@ -39,12 +30,8 @@ class DependencyInjectionTest extends TestCase
         $this->assertNotNull($dispatcher);
     }
 
-    /**
-     *
-     */
     public function testMissingService()
     {
-
         $this->expectException(ServiceNotFoundException::class);
 
         $kernel = $this->kernel;
