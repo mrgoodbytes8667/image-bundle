@@ -8,6 +8,7 @@ class ImageLoadFailureEvent extends AbstractImageLoadEvent
 {
     /**
      * @return int
+     *
      * @throws TransportExceptionInterface
      */
     public function getStatusCode()

@@ -1,10 +1,10 @@
 <?php
 
-
 namespace Bytes\ImageBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+
 use function Symfony\Component\String\u;
 
 class Configuration implements ConfigurationInterface
@@ -34,11 +34,10 @@ class Configuration implements ConfigurationInterface
                                             ->validate()
                                                 ->always()->then(function ($value) {
                                                     $key = u($value);
-                                                    if($key->endsWith('.'))
-                                                    {
+                                                    if ($key->endsWith('.')) {
                                                         $key = $key->beforeLast('.');
                                                     }
-                                                    
+
                                                     return $key->toString();
                                                 })
                                             ->end()
@@ -59,11 +58,10 @@ class Configuration implements ConfigurationInterface
                                             ->validate()
                                                 ->always()->then(function ($value) {
                                                     $key = u($value);
-                                                    if($key->endsWith('.'))
-                                                    {
+                                                    if ($key->endsWith('.')) {
                                                         $key = $key->beforeLast('.');
                                                     }
-                                                    
+
                                                     return $key->toString();
                                                 })
                                             ->end()
