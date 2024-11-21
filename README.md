@@ -2,7 +2,7 @@
 [![Packagist Version](https://img.shields.io/packagist/v/mrgoodbytes8667/image-bundle?logo=packagist&logoColor=FFF&style=flat)](https://packagist.org/packages/mrgoodbytes8667/image-bundle)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/mrgoodbytes8667/image-bundle?logo=php&logoColor=FFF&style=flat)](https://packagist.org/packages/mrgoodbytes8667/image-bundle)
 ![Symfony Versions Supported](https://img.shields.io/endpoint?url=https%3A%2F%2Fshields.mrgoodbytes.dev%2Fshield%2Fsymfony%2F%255E7.0&logoColor=FFF&style=flat)
-![Symfony Versions Tested](https://img.shields.io/endpoint?url=https%3A%2F%2Fshields.mrgoodbytes.dev%2Fshield%2Fsymfony-test%2F%253E%253D7.0%2520%253C7.2&logoColor=FFF&style=flat)
+![Symfony Versions Tested](https://img.shields.io/endpoint?url=https%3A%2F%2Fshields.mrgoodbytes.dev%2Fshield%2Fsymfony-test%2F%253E%253D7.0%2520%253C7.3&logoColor=FFF&style=flat)
 ![Symfony LTS Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fshields.mrgoodbytes.dev%2Fshield%2Flts%2F%255E7.0&logoColor=FFF&style=flat)
 ![Symfony Stable Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fshields.mrgoodbytes.dev%2Fshield%2Fstable%2F%255E7.0&logoColor=FFF&style=flat)
 ![Symfony Dev Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fshields.mrgoodbytes.dev%2Fshield%2Fdev%2F%255E7.0&logoColor=FFF&style=flat)
