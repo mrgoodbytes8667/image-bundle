@@ -12,6 +12,7 @@ on:
 jobs:
   coverage:
     uses: mrgoodbytes8667/workflows/.github/workflows/code-coverage.yml@php8.2
+    secrets: inherit
     with:
       phpUnitVersion: 9.6
       setupPhpExtensions: ", imagick"
